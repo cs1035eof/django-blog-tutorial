@@ -1,0 +1,67 @@
+pip install virtualenv
+
+virtualenv E:\working\github\python\virtualenv_env
+
+E:\working\github\python\virtualenv_env\Scripts\activate
+
+pip install -r requirements.txt
+
+python manage.py migrate
+
+python manage.py createsuperuser
+
+python manage.py runserver
+zkl	zkl311311
+
+127.0.0.1:8000
+127.0.0.1:8000/admin
+
+python manage.py sqlmigrate blog 0001
+
+python manage.py shell
+
+
+# 存数据
+>>> from blog.models import Category, Tag, Post
+>>> c = Category(name='category test')
+>>> c.save()
+>>> t = Tag(name='tag test')
+>>> t.save()
+
+>>> from blog.models import Category, Tag, Post 
+>>> from django.utils import timezone 
+>>> from django.contrib.auth.models import User 
+>>> user = User.objects.get(username='zkl') 
+>>> c = Category.objects.get(name='category test') 
+>>> p = Post(title='title test', body='body test', created_time=timezone.now(), modified_time=timezone.now(), category=c, author=user) 
+>>> p.save()
+
+# 取数据
+>>> Category.objects.all() <QuerySet [<Category: Category object>]> 
+>>> Tag.objects.all() <QuerySet [<Tag: Tag object>]> 
+>>> Post.objects.all() <QuerySet [<Post: Post object>]>
+
+# 取数据
+>>> from blog.models import Category, Tag, Post 
+>>> Category.objects.all() <QuerySet [<Category: category test>]> 
+>>> Tag.objects.all() <QuerySet [<Tag: tag test>]> 
+>>> Post.objects.all() <QuerySet [<Post: title test>]> 
+>>> Post.objects.get(title='title test') <Post: title test>
+
+# 改数据
+>>> c = Category.objects.get(name='category test') 
+>>> c.name = 'category test new' 
+>>> c.save() 
+>>> Category.objects.all() <QuerySet [<Category: test category new>]>
+
+# 删数据
+>>> p = Post.objects.get(title='title test') 
+>>> p <Post: title test> 
+>>> p.delete() (1, {'blog.Post_tags': 0, 'blog.Post': 1}) 
+>>> Post.objects.all() <QuerySet []>
+
+
+
+
+
+
